@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <span>輸入玩家姓名：</span><input type="text" id="玩家姓名" placeholder="玩家暱稱">
+    <input type="submit" id="提交玩家姓名"><br>
+    <span id="player"></span><br>
+
+    <span>底台：<input type="text" id="table" value="0" name="table"></span><br>
+
+    <span>連莊：</span><input type="text" id="連莊" value="0" disabled>
+    <input type="button" value="+" id="hostplus">
+    
+    <div class="point1">
+    <input type="checkbox" id="莊家"><span>莊家</span>
+    <input type="checkbox" id="門清"><span>門清</span>
+    <input type="checkbox" id="不求" disabled><span>不求</span>
+    <input type="checkbox"><span>自摸</span>
+    <input type="checkbox"><span>風牌</span>
+    <input type="checkbox"><span>風圈</span>
+    <input type="checkbox"><span>花牌1</span>
+    <input type="checkbox"><span>花牌2</span>
+    <input type="checkbox"><span>搶槓</span>
+    <input type="checkbox"><span>紅中</span>
+    <input type="checkbox"><span>發財</span>
+    <input type="checkbox"><span>白板</span>
+    <input type="checkbox"><span>獨聽</span>
+    <input type="checkbox"><span>半求</span>
+    <input type="checkbox"><span>槓上開花</span>
+    <input type="checkbox"><span>河底撈魚</span>
+    <input type="checkbox"><span>海底撈月</span>
+    </div>
+
+    <div class="point2">
+    <input type="checkbox"><span>平胡</span>  
+    <input type="checkbox"><span>全求</span>  
+    <input type="checkbox"><span>花槓</span>  
+    <input type="checkbox"><span>三暗刻</span>
+    </div>
+    
+    <div class="point4">
+    <input type="checkbox"><span>地聽</span>  
+    <input type="checkbox"><span>碰碰胡</span>
+    <input type="checkbox"><span>小三元</span>
+    <input type="checkbox"><span>混一色</span>
+    </div>
+
+    <div class="point5">
+    <input type="checkbox"><span>四暗刻</span>
+    </div>
+    
+    <div class="point8">
+    <input type="checkbox"><span>天聽</span>    
+    <input type="checkbox"><span>五暗刻</span>  
+    <input type="checkbox"><span>大三元</span>  
+    <input type="checkbox"><span>小四喜</span>  
+    <input type="checkbox"><span>清一色</span>  
+    <input type="checkbox"><span>字一色</span>  
+    <input type="checkbox"><span>八仙過海</span>
+    </div>
+
+    <div class="point16">
+    <input type="checkbox"><span>天胡</span>  
+    <input type="checkbox"><span>人胡</span>
+    <input type="checkbox"><span>地胡</span>
+    <input type="checkbox"><span>大四喜</span>
+    </div>
+
+    
+    <input type="submit" id="finish" onclick="finish()">
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    
+    <script>
+        //顯示玩家姓名
+        $("#提交玩家姓名").click(function () { 
+            var name = $("#玩家姓名").val();
+            $("#player").append("<br><span>玩家：</span>" + name + "<br>");
+        });
+        //計分
+        $("#finish").click(function finish() { 
+            var table = parseFloat($("#table").val());
+            var host = parseFloat($("#連莊").val());
+            var point1 = $(".point1 input:checked");
+            var point2 = $(".point2 input:checked");
+            var point4 = $(".point4 input:checked");
+            var point5 = $(".point5 input:checked");
+            var point8 = $(".point8 input:checked");
+            var point16 = $(".point16 input:checked");
+            var finish = table + host*2 + point1.length + (point2.length)*2 + (point4.length)*4 + (point5.length)*5 + (point8.length)*8 + (point16.length)*16;
+            var strfinish = finish.toString();
+            confirm("\n分數已登入\n\n玩家" + "獲得了 " + strfinish + " 分");
+        });
+        //沒達到要求不許添加
+        $("#莊家").click(function () { 
+            $("#連莊").removeAttr("disabled");
+            
+        });
+        $("#門清").click(function () { 
+                $("#不求").removeAttr("disabled");
+            });
+        //按下按鈕連莊加1
+        $("#莊家").click(function () {
+        var count = 0;
+        $("#連莊").val(count);
+        $("#hostplus").click(function () {
+        count = count + 1;
+        $("#連莊").val(count); }) })
+    </script>
+
+
+</body>
+</html>
